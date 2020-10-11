@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 from django.conf import settings
 
 urlpatterns = [
-    url(r'^admin/', include('admin.site.urls')),
+    url(r'^admin/', admin.site.urls),
     url(r'^gallery/',include('gallery.urls'))
 ]
 
