@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
  
- from django.db import models
+from django.db import models
 
 # Create your models here.
 class Category(models.Model):
@@ -42,7 +42,7 @@ class Location(models.Model):
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
     image_description = models.TextField()
-    image = models.ImageField(upload_to='gallery/',default='default.jpg')
+    image = models.ImageField(upload_to='gallery/',default='eva.jpg')
     image_location = models.ForeignKey(Location)
     # image_category = models.ForeignKey(Category,default = "")
 
