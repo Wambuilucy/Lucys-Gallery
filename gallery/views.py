@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from models imort Image,Category,Location
+from .models import Image,Category,Location
 
 # Create your views here.
 
@@ -10,8 +10,8 @@ from models imort Image,Category,Location
     #return HttpResponse('Welcome to the Lucys-Gallery')
     #return render(request,'index.html', {'all_images':all_images,'location_results':location_results,'category_results':category_results})
 
-  def index(request):
-        return render(request, 'index.html')
+#   def index(request):
+#         return render(request, 'index.html')
 
 def gallery(request):
     images = Image.objects.all()
