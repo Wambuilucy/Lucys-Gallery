@@ -59,7 +59,6 @@ Kinyanjui Lucy Wambui.
 # TECHNOLOGIES USED
 
 * Django -web framework used
-* Javascript - For DOM(document object Manipulation) script
 * HTML -for building mark up pages/User Interface
 * css - For Styling User Interface
 
