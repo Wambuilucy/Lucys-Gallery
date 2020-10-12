@@ -20,7 +20,7 @@ class Category(models.Model):
 
     @classmethod
     def search_by_image_category(cls,search_term):
-        images = cls.objects.filter(category__category_name__icontains=search_term)
+        images = Image.objects.filter(category__category_name__icontains=search_term)
         return images
 
 
@@ -44,11 +44,13 @@ class Image(models.Model):
     image_description = models.TextField()
     image = models.ImageField(upload_to='gallery/',default='eva.jpg')
     image_location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    # image_category = models.ForeignKey(Category,default = "")
+    image_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    
+    
 
     @classmethod
-    def search_by_image_category(cls,search_term):
-        images = cls.objects.filter(image_category__category_name__icontains=search_term)
+    def search_by_image_category(cls,image):
+        images = Image.objects.filter(image_category__image_name__icontains=image)
         return images
 
 
