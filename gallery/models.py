@@ -1,73 +1,70 @@
 from django.db import models
-
-# Create your models here.
- 
-from django.db import models
-
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length =30)
-
     def save_category(self):
         self.save()
-
     def delete_category(self):
         self.delete()
-
+    def update_category(self, update):
+        self.category_name = update
+        self.save()
+    @classmethod
+    def get_category_id(cls, id):
+        category = Category.objects.get(pk = id)
+        return category
     def __str__(self):
         return self.category_name
-        
-
-    @classmethod
-    def search_by_image_category(cls,search_term):
-        images = Image.objects.filter(category__category_name__icontains=search_term)
-        return images
-
-
 class Location(models.Model):
     location_name = models.CharField(max_length=30)
-
+    @classmethod
+    def tag_articles(cls):
+        tags = cls.objects.all()
+        return tags
     def save_location(self):
         self.save()
-
     def delete_location(self):
         self.delete()
-
+    def update_location(self, update):
+        self.location_name = update
+        self.save()
+    @classmethod
+    def get_location_id(cls, id):
+        locate = Location.objects.get(pk = id)
+        return locate
     def __str__(self):
         return self.location_name
-
-    @classmethod
-    def update_location(cls, id, value):
-        cls.objects.filter(id=id).update(location_name=value)
 class Image(models.Model):
     image_name = models.CharField(max_length=30)
     image_description = models.TextField()
     image = models.ImageField(upload_to='gallery/',default='eva.jpg')
-    image_location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    image_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    
-    
-
-    @classmethod
-    def search_by_image_category(cls,image):
-        images = Image.objects.filter(image_category__image_name__icontains=image)
-        return images
-
-
-    
- 
-
+    image_location = models.ForeignKey('Location', on_delete=models.CASCADE)
+    image_category = models.ForeignKey('Category', on_delete=models.CASCADE)
     def save_image(self):
         self.save()
-
     def delete_image(self):
         self.delete()
-
-    def update_image(self, Name=None, category=None):
-        self.image_name = Name if Name else self.Name
-        self.image_category = category if category else self.image_category 
-        self.save()
-
-
+    @classmethod
+    def update_image(cls, id ,image_name, image_description , image_location, image_category):
+        update = cls.objects.filter(id = id).update(image_name = image_name, image_description = image_description ,image_location = image_location,image_category = image_category)
+        # return update
+    @classmethod
+    def get_all_images(cls):
+        images = cls.objects.all()
+        return images
+    @classmethod
+    def get_image_by_id(cls,id):
+        image = cls.objects.filter(id= id).all()
+        return image
+    @classmethod
+    def search_by_category(cls,image_category):
+        images = Image.objects.filter(image_category__name__icontains=image_category)
+        return images
+    @classmethod
+    def filter_by_location(cls, image_location):
+        images_location = cls.objects.filter(image_location__id=image_location)
+        return images_location
     def __str__(self):
         return self.image_name
+    class Meta:
+        ordering = ['image_name']

@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='image',
             name='image_category',
-            field=models.ForeignKey(default=django.utils.timezone.now, on_delete=django.db.models.deletion.CASCADE, to='gallery.category'),
+            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='gallery.category'),
             preserve_default=False,
         ),
     ]

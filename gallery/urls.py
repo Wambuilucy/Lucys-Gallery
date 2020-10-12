@@ -24,7 +24,7 @@ urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^gallery/', views.gallery, name='gallery'),
-    url(r'^search/', views.search_by_image_category, name = 'search_by_image_category')
+    url(r'^search/', views.search_image, name = 'search_image')
     #url('^$',views.welcome,name = 'welcome'),
 ]
 
